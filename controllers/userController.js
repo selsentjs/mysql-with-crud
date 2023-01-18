@@ -8,7 +8,7 @@ const getAllUsers = async (req, res) => {
       if (err) {
         throw err;
       }
-      res.status(200).json({ user });
+      res.status(200).json( user );
     });
   } catch (err) {
     res.status(500).json({ msg: err });
@@ -24,7 +24,7 @@ const getSingleUser = async (req, res) => {
       if (err) {
         throw err;
       }
-      res.status(200).json({ user });
+      res.status(200).json( user );
     });
   } catch (err) {
     res.status(500).json({ msg: err });
@@ -47,7 +47,7 @@ const createUser = async (req, res) => {
         if (err) {
           throw err;
         }
-        res.status(200).json({ msg: "user created", user });
+        res.status(200).json( "user created" );
       });
     } else {
       res.send("All the fields are required");
@@ -66,7 +66,7 @@ const updateUser = async (req, res) => {
     console.log("sql", sql);
     con.query(sql, [name, email, id], (err) => {
       if (err) throw err;
-      res.status(200).json({ msg: "data has been updated" });
+      res.status(200).json( "data has been updated" );
     });
   } catch (err) {
     res.status(500).json({ msg: err });
@@ -81,7 +81,7 @@ const deleteUser = async (req, res) => {
     let sql = await "DELETE FROM USER where id=?";
     con.query(sql, id, (err) => {
       if (err) throw err;
-      res.status(200).json({ msg: "data deleted successfully" });
+      res.status(200).json("data deleted successfully");
     });
   } catch (err) {
     res.status(500).json({ msg: err });
