@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Home = ({
   data,
+  setData,
   setViewData,
   setEditID,
   setName,
@@ -15,11 +16,24 @@ const Home = ({
   };
 
   // edit
-  const editUser = (item) => {
-    setEditID(item);
-    setName(item.name);
-    setEmail(item.email);
+  const editUser = (id) => {
+    const result = data?.find((item) => {
+      return item.id === id;
+    });
+    setEditID(id);
     setIsEdit(true);
+    setName(result.name);
+    setEmail(result.email);
+  };
+
+  // delete
+
+  const deleteUser = (id) => {
+    const result = data?.filter((item) => {
+      return item.id !== id;
+    });
+    console.log("deleted result:", result);
+    setData(result);
   };
 
   return (
@@ -51,7 +65,9 @@ const Home = ({
                       <NavLink to={`/edit/${item.id}`}>
                         <button onClick={() => editUser(item.id)}>Edit</button>
                       </NavLink>
-                      <button>Delete</button>
+                      <button onClick={() => deleteUser(item.id)}>
+                        Delete
+                      </button>
                       <NavLink to={`/view/${item.id}`}>
                         <button onClick={() => viewUser(item)}>View</button>
                       </NavLink>

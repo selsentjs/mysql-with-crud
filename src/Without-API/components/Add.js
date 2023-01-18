@@ -1,37 +1,22 @@
 import React from "react";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import { v4 as uuid } from "uuid";
 
-const Edit = ({
-  setData,
-  setEditID,
-  name,
-  setName,
-  email,
-  setEmail,
-  data,
-  editID,
-  setIsEdit,
-}) => {
+const Add = ({ name, setName, email, setEmail, data, setData }) => {
   const navigate = useNavigate();
-  // update
-  const updateUser = () => {
-    if (name && email) {
-      setData(
-        data?.map((item) => {
-          if (item.id === editID) {
-            return { ...item, name, email };
-          }
-          return item;
-        })
-      );
-      setName("");
-      setEmail("");
-      setEditID(null);
-      setIsEdit(false);
-    }
-    navigate("/");
-  };
 
+  // add
+  const addUser = () => {
+    const newUser = {
+      id: uuid(),
+      name,
+      email,
+    };
+    navigate("/");
+    setName("");
+    setEmail("");
+    setData([...data, newUser]);
+  };
   return (
     <div>
       <form onSubmit={(e) => e.preventDefault()}>
@@ -53,10 +38,10 @@ const Edit = ({
           onChange={(e) => setEmail(e.target.value)}
         />
         <br /> <br />
-        <button onClick={updateUser}>Update User</button>
+        <button onClick={addUser}>Add User</button>
       </form>
     </div>
   );
 };
 
-export default Edit;
+export default Add;
