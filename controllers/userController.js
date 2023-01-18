@@ -36,7 +36,7 @@ const getSingleUser = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { name, email } = req.body;
-    if (!name && !email) {
+    if (name !=='' && email !=='') {
       let sql =
         (await "INSERT INTO USER(name, email) VALUES('") +
         name +
